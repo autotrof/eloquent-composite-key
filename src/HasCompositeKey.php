@@ -1,16 +1,15 @@
 <?php
 
-namespace Thiagoprz\CompositeKey;
+namespace Autotrof\Eloquent;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Trait HasCompositeKey
- * @package Thiagoprz\CompositeKey
+ * @package Autotrof\EloquentCompositeKey
  */
 trait HasCompositeKey
 {
-
     /**
      * Set the keys for a save update query.
      *
@@ -20,8 +19,8 @@ trait HasCompositeKey
     protected function setKeysForSaveQuery($query)
     {
         $keys = $this->getKeyName();
-        return !is_array($keys) ? parent::setKeysForSaveQuery($query) : $query->where(function($q) use($keys) {
-            foreach($keys as $key){
+        return !is_array($keys) ? parent::setKeysForSaveQuery($query) : $query->where(function ($q) use ($keys) {
+            foreach($keys as $key) {
                 $q->where($key, '=', $this->getAttribute($key));
             }
         });
@@ -57,7 +56,7 @@ trait HasCompositeKey
     {
         $fields = $this->getKeyName();
         $keys = [];
-        array_map(function($key) use(&$keys) {
+        array_map(function ($key) use (&$keys) {
             $keys[] = $this->getAttribute($key);
         }, $fields);
         return $keys;
@@ -74,7 +73,7 @@ trait HasCompositeKey
         $modelClass = self::class;
         $model = new $modelClass();
         $keys = $model->primaryKey;
-        return $model->where(function($query) use($ids, $keys) {
+        return $model->where(function ($query) use ($ids, $keys) {
             foreach ($keys as $idx => $key) {
                 if (isset($ids[$idx])) {
                     $query->where($key, $ids[$idx]);
@@ -91,17 +90,11 @@ trait HasCompositeKey
      * @param array $ids
      * @return mixed
      */
-    public function findOrFail(array $ids)
+    public static function findOrFail(array $ids)
     {
-        if (!isset($this)) {
-            $modelClass = self::class;
-            $model = new $modelClass();
-        } else {
-            $model = $this;
-        }
-        $record = $model->find($ids);
+        $record = self::find($ids);
         if (!$record) {
-            throw new ModelNotFoundException;
+            throw new ModelNotFoundException();
         }
         return $record;
     }

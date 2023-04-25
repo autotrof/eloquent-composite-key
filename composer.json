@@ -1,5 +1,5 @@
 {
-    "name": "thiagoprz/eloquent-composite-key",
+    "name": "autotrof/eloquent-composite-key",
     "description": "Eloquent Composite Key Support Package",
     "type": "library",
     "autoload": {
@@ -7,7 +7,7 @@
             "src/"
         ],
         "psr-4": {
-            "Thiagoprz\\CompositeKey\\": "src"
+            "Autotrof\\EloquentCompositeKey\\": "src"
         }
     },
     "autoload-dev": {
@@ -15,21 +15,17 @@
             "tests/"
         ],
         "psr-4": {
-            "Thiagoprz\\CompositeKey\\Tests\\": "tests"
+            "Autotrof\\EloquentCompositeKey\\Tests\\": "tests"
         }
     },
     "require": {
-        "php": "^7.1 || ^8.0 || ^8.1"
-    },
-    "require-dev": {
-        "orchestra/testbench": "6",
-        "squizlabs/php_codesniffer": "4.0.x-dev"
+        "php": "^7.1 || ^8.0 || ^8.1 || ^8.2"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Thiago Przyczynski",
-            "email": "przyczynski@gmail.com"
+            "name": "Agung Kurniawan",
+            "email": "upload.kurniawan@gmail.com"
         }
     ],
     "minimum-stability": "dev"
